@@ -14,7 +14,10 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=[
+        "http://localhost:5173",
+        "https://urban-parcel-mapping.vercel.app",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -68,9 +71,7 @@ async def upload_image(file: UploadFile = File(...)):
             "message": "Invalid image"
         }
 
-    height, width, channels = (
-        image.shape
-    )
+    height, width, channels = image.shape
 
     return {
         "message": "Image processed successfully",
